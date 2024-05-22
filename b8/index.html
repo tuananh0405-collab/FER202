@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <div class="header-main">
+        <img class="header-logo" src="" />
+        <ul class="header-menu">
+          <li class="">Home</li>
+          <li class="">About</li>
+          <li class="">Blog</li>
+          <li class="">Services</li>
+          <li class="">Contact</li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="title">
+        <h1 class="">List of employees</h1>
+      </div>
+      <div class="info">
+        <div class="field">
+          <label for="empID">Employee id</label>
+          <input id="empID" type="text" placeholder="Enter ID" />
+        </div>
+        <div class="field">
+          <label for="empName">Employee Name</label>
+          <input id="empName" type="text" placeholder="Enter Name" />
+        </div>
+        <div class="field">
+          <label for="empAge">Age</label>
+          <input id="empAge" type="number" placeholder="Enter Age" />
+        </div>
+        <div class="info-gender">
+          <span class="">Gender:</span>
+          <div class="male-gender">
+            <input type="radio" checked name="gender" id="male" value="male" />
+            <label for="male">Male</label>
+          </div>
+          <div class="female-gender">
+            <input type="radio" name="gender" id="female" value="female" />
+            <label for="female">Female</label>
+          </div>
+        </div>
+      </div>
+      <div class="btn">
+        <button
+          onclick="saveEmployee()"
+          style="background-color: #007bff"
+          class="btn-save"
+        >
+          Save
+        </button>
+        <button
+          onclick="updateEmployee()"
+          style="background-color: #6c757d"
+          class="btn-update"
+        >
+          Update
+        </button>
+        <button
+          onclick="sortByName()"
+          style="background-color: #28a745"
+          class="btn-sort"
+        >
+          Sort by name
+        </button>
+        <button
+          onclick="sortByAge()"
+          style="background-color: #4b17c5"
+          class="btn-sort"
+        >
+          Sort by age
+        </button>
+        <button
+          onclick="searchByName()"
+          style="background-color: #17a2b8"
+          class="btn-search"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+
+    <table class="table-employee">
+      <thead class="head-employee">
+        <tr>
+          <td>ID</td>
+          <td>Name</td>
+          <td>Age</td>
+          <td>Gender</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody class="empList"></tbody>
+    </table>
+
+    <footer>
+      <div class="footer-icon">
+        <i class="fab fa-youtube"></i>
+        <i class="fab fa-facebook"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-twitter"></i>
+      </div>
+      <ul class="header-menu">
+        <li class="">Home</li>
+        <li class="">About</li>
+        <li class="">Blog</li>
+        <li class="">Services</li>
+        <li class="">Contact</li>
+      </ul>
+      <h3>AnhTTV20 © 2023</h3>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

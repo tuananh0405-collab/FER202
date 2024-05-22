@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LAB 1</title>
+    <link
+      rel="stylesheet"
+      href="node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .event {
+        color: rgb(0, 157, 255);
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Bai 2:</h1>
+    <h1>List of students</h1>
+    Search by Name:
+    <input type="text" id="nameSearch" placeholder="Search by name" />
+    <!-- <form action="" onsubmit="searchByPE()"> -->
+      Search by PE:
+      <input type="text" id="peSearchMin" placeholder="From..." />
+      <input type="text" id="peSearchMax" placeholder="To..." />
+      <input id="peSearch" type="button" value="Search"/>
+    <!-- </form> -->
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Full Name</th>
+          <th>PE</th>
+          <th>FE</th>
+          <th class="event">Total</th>
+          <th class="event">Date of Exam</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+      const students = [
+        {
+          id: 1,
+          firstName: "Bach",
+          lastName: "Ha",
+          PE: 5.19999999,
+          FE: 7,
+          dateofExam: "2/4/2021",
+        },
+        {
+          id: 2,
+          firstName: "Vu",
+          lastName: "Ba",
+          PE: 5.199998,
+          FE: 7,
+          dateofExam: "1/6/2020",
+        },
+        {
+          id: 3,
+          firstName: "Vu",
+          lastName: "An",
+          PE: 5.3,
+          FE: 0,
+          dateofExam: "2/4/2021",
+        },
+        {
+          id: 4,
+          firstName: "Tran",
+          lastName: "Tuan",
+          PE: 9,
+          FE: 5,
+          dateofExam: "2/4/2020",
+        },
+        {
+          id: 5,
+          firstName: "Ngo",
+          lastName: "Nam Anh",
+          PE: 4,
+          FE: 4,
+          dateofExam: "2/4/2020",
+        },
+      ];
+
+      const tableBody = document.querySelector("tbody");
+      students.forEach((student) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+                <td>${student.id}</td>
+                <td>${student.firstName} ${student.lastName}</td>
+                <td>${student.PE}</td>
+                <td>${student.FE}</td>
+                <td>${(student.PE + student.FE) / 2}</td>
+                <td>${student.dateofExam}</td>
+            `;
+        tableBody.appendChild(row);
+      });
+
+      const tableRows = Array.from(tableBody.querySelectorAll("tr"));
+
+      const sortByTotal = () => {
+        tableRows.sort((a, b) => {
+          const totalA = parseFloat(a.cells[4].textContent);
+          const totalB = parseFloat(b.cells[4].textContent);
+          return totalA - totalB;
+        });
+        tableRows.forEach((row) => tableBody.appendChild(row));
+      };
+
+      const sortByDate = () => {
+        tableRows.sort((a, b) => {
+          const dateA = new Date(a.cells[5].textContent);
+          const dateB = new Date(b.cells[5].textContent);
+          return dateA - dateB;
+        });
+        tableRows.forEach((row) => tableBody.appendChild(row));
+      };
+
+      document
+        .querySelector("th:nth-child(5)")
+        .addEventListener("click", sortByTotal);
+      document
+        .querySelector("th:nth-child(6)")
+        .addEventListener("click", sortByDate);
+
+      const nameSearchInput = document.getElementById("nameSearch");
+      const filterRows = () => {
+        const nameFilter = nameSearchInput.value.toLowerCase();
+
+        tableRows.forEach((row) => {
+          const fullName = row.cells[1].textContent.toLowerCase();
+          row.style.display = fullName.includes(nameFilter) ? "" : "none";
+        });
+      };
+
+      nameSearchInput.addEventListener("input", filterRows);
+
+      const searchByPE = () => {
+        const minPE = parseFloat(document.getElementById("peSearchMin").value);
+        const maxPE = parseFloat(document.getElementById("peSearchMax").value);
+
+        if (isNaN(minPE) || isNaN(maxPE)) {
+          alert("Please enter valid PE values.");
+          return;
+        }
+
+        tableRows.forEach((row) => {
+          const pe = parseFloat(row.cells[2].textContent);
+          row.style.display = pe >= minPE && pe <= maxPE ? "" : "none";
+        });
+      };
+      console.log(students);
+      const peSearch = document.getElementById("peSearch");
+
+      peSearch.addEventListener("click", searchByPE);
+
+    </script>
+  </body>
+</html>
