@@ -1,0 +1,26 @@
+.custom-sidebar {
+    border: none;
+    padding: 0;
+  }
+  
+  .custom-sidebar .sidebar-item {
+    border: none;
+    border-radius: 0;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .custom-sidebar .sidebar-item:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
+  }
+  
+  .custom-sidebar .sidebar-item.active {
+    background-color: #e9ecef;
+    color: #007bff;
+  }
+  
