@@ -1,24 +1,22 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 
-function EmployeeList() {
+function EmployeeList({ departments }) {
   const { id } = useParams();
   const [employees, setEmployees] = useState([]);
   const [department, setDepartment] = useState('');
 
   useEffect(() => {
-    axios.get('/database.json').then((response) => {
-      const departmentData = response.data.departments.find(dept => dept.id.toString() === id);
-      setDepartment(departmentData.name);
-
-      const departmentEmployees = response.data.employees.filter(
-        (employee) => employee.department.toString() === id
-      );
-      setEmployees(departmentEmployees);
+    axios.get(`http://localhost:9999/employees?department=${id}`).then((response) => {
+      setEmployees(response.data);
     });
-  }, [id]);
+
+    const departmentData = departments.find(dept => dept.id.toString() === id);
+    setDepartment(departmentData.name);
+  }, [id, departments]);
 
   return (
     <div>
@@ -37,7 +35,7 @@ function EmployeeList() {
         </thead>
         <tbody>
           {employees.map((employee) => (
-            <tr key={employee.id}  style={{ background: "#f0f0f0" }}>
+            <tr key={employee.id} style={{ background: "#f0f0f0" }}>
               <td>{employee.id}</td>
               <td>{employee.name}</td>
               <td>{employee.dob}</td>

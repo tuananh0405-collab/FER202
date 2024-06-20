@@ -1,25 +1,3 @@
-// import React from 'react';
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import Home from './components/Home';
-// import EditProject from './components/EditProject';
-// import EmployeeList from './components/EmployeeList';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <Router>
-//       <Routes>
-//         <Route path="/" element={<Home />} />
-//         <Route path="/projects/edit/:id" element={<EditProject />} />
-//         <Route path="/departments/:id/employees" element={<EmployeeList />} />
-//       </Routes>
-//     </Router>
-//   );
-// }
-
-// export default App;
-
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -33,9 +11,11 @@ function App() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    axios.get('/database.json').then((response) => {
-      setDepartments(response.data.departments);
-      setProjects(response.data.projects);
+    axios.get('http://localhost:9999/departments').then((response) => {
+      setDepartments(response.data);
+    });
+    axios.get('http://localhost:9999/projects').then((response) => {
+      setProjects(response.data);
     });
   }, []);
 
